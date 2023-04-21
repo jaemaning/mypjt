@@ -1,0 +1,10 @@
+asgiref==3.5.2
+autopep8==2.0.2
+beautifulsoup4==4.12.2
+Django==3.2.13
+djangorestframework==3.14.0
+pycodestyle==2.10.0
+pytz==2022.1
+soupsieve==2.4
+sqlparse==0.4.2
+tomli==2.0.1

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{person.username}} 님의 프로필</h1>
+<p>팔로잉 : {{person.followings.all | length}} | 팔로워 : {{person.followers.all | length}} </p>
+{% if person.username != user.username %}
+<form action="{% url 'accounts:follow' person.username %}" method='POST'>
+    {% csrf_token %}
+    {% if request.user in person.followers.all %}
+    <input type="submit" value="팔로우취소">
+    {% else %}
+    <input type="submit" value="팔로우">
+    {% endif %}
+  </form>
+{% endif %}
+<hr>
+<h3>{{person.username}}'s 게시글</h3>
+<p></p>
+<hr>
+<h3>{{person.username}}'s 댓글</h3>
+<p></p>
+<hr>
+<a class='btn btn-dark' href="{% url 'movies:index' %}">이전</a>
+
+{% endblock content %}
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<h1>profile page</h1>
+<h2>{{person}} 님의 프로필</h2>
+<a href="{% url 'accounts:follow' person.user %}">follow</a>
+<p>followings : {{person.user_followings.count}}</p>
+<p>followers : {{person.user_followers.count}}</p>
+<hr>
+<h1>작성한 글 갯수 : {{person.movie_set.all | length}}</h1>
+<h3>작성한 글</h3>
+{% for movie in person.movie_set.all %}
+<a href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a>
+<p>{{movie.description}}</p>
+<br>
+{% endfor %}
+<hr>
+<h1>작성한 댓글 수: {{person.comment_set.count}}</h1>
+<h3>작성한 댓글</h3>
+{% for comment in person.comment_set.all %}
+<p>{{comment.content}}</p>
+<br>
+{% endfor %}
+<hr>
+{% endblock content %} {% endcomment %}

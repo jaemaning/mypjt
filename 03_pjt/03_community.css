@@ -1,0 +1,16 @@
+/* 03_community.css */
+/* 아래에 코드를 작성해 주세요. */
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+small {
+    display: block;
+}
