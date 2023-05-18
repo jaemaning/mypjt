@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <title>Document</title>
+  <style>
+    body {
+      margin-top: 20px;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      {% if user.is_authenticated %}
+      <div class="d-flex justify-content-between">
+        <h2>Hello, <a href="{% url 'accounts:profile' user %}">{{ user.username }}</a></h2>
+        <form action="{% url 'accounts:logout' %}" method="POST">
+          {% csrf_token %}
+          <input class="btn btn-secondary" type="submit" value="Logout">
+        </form>
+      </div>
+      <br>
+      <div class="d-flex justify-content-between">
+        <a href="{% url 'movies:index'%}">Movie</a>
+        <a href="{% url 'community:index'%}">Community</a>
+        <a href="{% url 'community:create'%}">New Review</a>
+        <a href="{% url 'movies:recommended' user.username %}">Recommended</a>
+      </div>
+      {% else %}
+      <div>
+        <a href="{% url 'accounts:signup' %}">Signup</a>
+        <a href="{% url 'accounts:login' %}">Login</a>
+      </div>
+      {% endif %}
+    </nav>
+    <br>
+    <hr>
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

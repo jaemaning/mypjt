@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Movies</h1>
+  <br>
+  <ul>
+  {% for movie in movies %}
+  <div class="toDetail" data-movie-id="{{ movie.pk }}" style="cursor: pointer;">
+    <li>
+      <h4>{{movie.title}}</h4>
+      <small>{{movie.release_date}}</small>
+    </li>
+  </div>
+  <hr>
+  {% endfor %}
+  </ul>
+  <script>
+    const toDetails = document.querySelectorAll('.toDetail')
+
+    toDetails.forEach((toDetail)=>{
+      toDetail.addEventListener("click", function(e){
+        const movieId = toDetail.dataset.movieId
+        window.location.href = `http://127.0.0.1:8000/movies/${movieId}`
+      })
+    })
+      
+  </script>
+{% endblock %}

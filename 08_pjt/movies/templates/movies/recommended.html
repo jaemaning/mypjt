@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Recommend</h1>
+<br>
+
+<h3>내가 좋아하는 장르 : {{person.favorite_genre.name}}</h3>
+<br>
+<ul>
+  {% for recommended_movie in recommended_movies %}
+  <div class="toDetail" data-movie-id="{{ recommended_movie.0.pk }}" style="cursor: pointer;">
+    <li>
+      <h4>{{recommended_movie.0.title}}</h4>
+      <small>{{recommended_movie.0.release_date}}</small>
+    </li>
+  </div>
+  <hr>
+  {% endfor %}
+</ul>
+
+<script>
+  const toDetails = document.querySelectorAll('.toDetail')
+
+  toDetails.forEach((toDetail)=>{
+    toDetail.addEventListener("click", function(e){
+      const movieId = toDetail.dataset.movieId
+      window.location.href = `http://127.0.0.1:8000/movies/${movieId}`
+    })
+  })
+</script>
+{% endblock %}
